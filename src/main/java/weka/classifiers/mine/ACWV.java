@@ -19,6 +19,7 @@ public class ACWV extends Classifier
 	int count = 0;
 	static int c = 0;
 	FastVector head;
+	int ruleNumLim = 0;
 
 
 
@@ -28,7 +29,7 @@ public class ACWV extends Classifier
 	//
 	////   Column 02
 	double minSup = 0.01;	
-	double minCon = 1.1;
+	double minConv = 1.1;
 	//
 	////   Column 03
 	//   double minSup = 0.01;	
@@ -89,7 +90,12 @@ public class ACWV extends Classifier
 
 
 	static long timecost = 0;
-	LinkedList m_allTheRules=new LinkedList();
+	public ACWV(double minsup, double minconv, int ruleNumLimit){
+		minSup = minsup;
+		minConv = minconv;
+		ruleNumLim = ruleNumLimit;
+		
+	}
 	public void buildClassifier (Instances data)throws Exception
 	{ 
 
@@ -106,9 +112,9 @@ public class ACWV extends Classifier
 		//	 classValue=differentiate(clValue);//find all the different class value
 		//	 count(clValue);
 		if(c>1){
-			f = new CCFP();
+			f = new CCFP(ruleNumLim);
 			long t1 = System.currentTimeMillis();
-			head = f.buildClassifyNorules(myData, m_onlyClass, minSup, 1, minCon);
+			head = f.buildClassifyNorules(myData, m_onlyClass, minSup, 1, minConv);
 			long t2 = System.currentTimeMillis();
 			timecost += (t2 - t1);
 			//System.out.println("the time cost of building classfier is :" + timecost);
@@ -174,116 +180,24 @@ public class ACWV extends Classifier
 		//			String[] arg ={"-t","tictest.arff"};
 		//			runClassifier(new JzhACWV(), arg);
 
-		//			String[] arg1 ={"-t","vehicleout.arff"};
-		//			runClassifier(new JzhACWV(), arg1);
-		//
-		//			String[] arg2 ={"-t","balloons.arff"};
-		//			runClassifier(new JzhACWV(), arg2);
-		//
-		//			String[] arg3 ={"-t","car.arff"};
-		//			runClassifier(new JzhACWV(), arg3);
-
-		//			String[] arg4 ={"-t","lenses.arff"};
-		//			runClassifier(new JzhACWV(), arg4);
-		//			
-		//			String[] arg5 ={"-t","tic-tac-toe.arff"};
-		//			runClassifier(new JzhACWV(), arg5);
-		//			
-		//			String[] arg6 ={"-t","ionoout2.arff"};
-		//			runClassifier(new JzhACWV(), arg6);
-		//			
-		//			String[] arg7 ={"-t","pimaout.arff"};
-		//			runClassifier(new JzhACWV(), arg7);
-		//			
-		//			String[] arg8 ={"-t","taeout.arff"};
-		//			runClassifier(new JzhACWV(), arg8);
-		//			
-		//			String[] arg9 ={"-t","habermanout.arff"};
-		//			runClassifier(new JzhACWV(), arg9);
-		//			
-		//			String[] arg10={"-t","glassout.arff"};
-		//			runClassifier(new JzhACWV(), arg10);
-		//			
-		//			String[] arg11={"-t","breastout.arff"};
-		//			runClassifier(new JzhACWV(), arg11);
-
-		long t3 = System.currentTimeMillis();
-		String[] arg12={"-t","cmcout.arff"};
-		runClassifier(new ACWV(), arg12);
-		long t4 = System.currentTimeMillis();
-		System.out.println(t4-t3);
-
-		//			String[] arg13={"-t","ecoliout.arff"};
-		//			runClassifier(new JzhACWV(), arg13);
-		//			
-		//			String[] arg14={"-t","liverout.arff"};
-		//			runClassifier(new JzhACWV(), arg14);
-		//			
-		//			String[] arg15={"-t","postout.arff"};
-		//			runClassifier(new JzhACWV(), arg15);
-		//			
-		//			String[] arg16={"-t","hypoout2.arff"};
-		//			runClassifier(new JzhACWV(), arg16);
-		//			
-		//			String[] arg17={"-t","yeastout.arff"};
-		//			runClassifier(new JzhACWV(), arg17);
-		//			
-		//			String[] arg18={"-t","autoout.arff"};
-		//			runClassifier(new JzhACWV(), arg18);
-		//			
-		//			String[] arg19={"-t","cleveout.arff"};
-		//			runClassifier(new JzhACWV(), arg19);
-		//			
-		//			String[] arg20={"-t","diabetesout.arff"};
-		//			runClassifier(new JzhACWV(), arg20);
-		//			
-		//			String[] arg21={"-t","heartout.arff"};
-		//			runClassifier(new JzhACWV(), arg21);
-		//			
-		//			String[] arg22={"-t","irisout.arff"};
-		//			runClassifier(new JzhACWV(), arg22);
-		//			
-		//			String[] arg23={"-t","laborout.arff"};
-		//			runClassifier(new JzhACWV(), arg23);
-		//			
-		//			String[] arg24={"-t","led7.arff"};
-		//			runClassifier(new JzhACWV(), arg24);
-		//			
-		//			String[] arg25={"-t","wineout.arff"};
-		//			runClassifier(new JzhACWV(), arg25);
-		//			
-		//			String[] arg26={"-t","zoo.arff"};
-		//			runClassifier(new JzhACWV(), arg26);
-		//			
-		//			String[] arg27={"-t","crxout.arff"};
-		//			runClassifier(new JzhACWV(), arg27);
-
-		//			String[] arg28={"-t","vehicleout.arff"};
-		//			runClassifier(new JzhACWV(), arg28);
-		//			
-		//			String[] arg29={"-t","lymph.arff"};
-		//			runClassifier(new JzhACWV(), arg29);
-
-		//			String[] arg30={"-t","austraout.arff"};
-		//			runClassifier(new JzhACWV(), arg30);
-		//			
-		//			String[] arg31={"-t","hepatiout.arff"};
-		//			runClassifier(new JzhACWV(), arg31);
-		//			
-		//			String[] arg32={"-t","germanout2.arff"};
-		//			runClassifier(new JzhACWV(), arg32);
-		//			
-		//			String[] arg33={"-t","sickout.arff"};
-		//			runClassifier(new JzhACWV(), arg33);
-		//			
-		//			String[] arg34={"-t","horseout2.arff"};
-		//			runClassifier(new JzhACWV(), arg34);
-		//			
-		//			String[] arg35={"-t","annealout.arff"};
-		//			runClassifier(new JzhACWV(), arg35);
-		//			
-		//			String[] arg36={"-t","sonarout2.arff"};
-		//			runClassifier(new JzhACWV(), arg36);
-
+		String dataset[] = {"tic-tac-toe","hypoout2","autoout","sonarout","sickout"};
+		int size = dataset.length;
+		String arg[] = new String[2];
+		long t1, t2;
+		for(int i=0;i<size;i++){
+			System.out.print(dataset[i]);
+			arg[0] = "-t";
+			arg[1] = "dataset/"+dataset[i]+".arff";
+			t1 = System.currentTimeMillis();
+			runClassifier(new ACWV(0.02,1.1,80000), arg);
+			t2 = System.currentTimeMillis();
+			System.out.println(", "+(t2-t1));
+		}
+//		String d[] = {"vehicleout","balloons","car","lenses","tic-tac-toe","ionoout2",
+//				"pimaout","taeout","habermanout","glassout","breastout","cmcout","ecoliout",
+//				"liverout","postout","hypoout2","yeastout","autoout","cleveout","diabetesout",
+//				"heartout","irisout","laborout","led7","wineout","zoo","crxout","lymph",
+//				"austraout","germanout2","sickout","horseout2","annealout","sonarout2"};
+		
 	}
 }

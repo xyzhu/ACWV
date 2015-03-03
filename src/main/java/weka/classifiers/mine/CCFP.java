@@ -38,7 +38,7 @@ public class CCFP implements Serializable{
 	/** The minimum support. */
 	protected double m_minSupport;
 	protected double m_minConv;
-	protected long minNumRules;
+	protected long maxRules;
 	/** The upper bound on the support */
 	protected double m_upperBoundMinSupport;
 
@@ -58,6 +58,9 @@ public class CCFP implements Serializable{
 	/** The class index. */  
 	protected int m_classIndex;
 
+	public CCFP(int ruleNumLim){
+		maxRules = ruleNumLim;
+	}
 	private CMARtree buildCMARtree(Instances instances,Instances OnlyClass,FastVector head) throws Exception{
 		int total=instances.numInstances();
 		int numClass = OnlyClass.attribute(0).numValues();
@@ -324,7 +327,6 @@ public class CCFP implements Serializable{
 		//		}
 		////////////////////////////for each test instance, find the cond-patten base and build CP-tree
 		terminal  = false;
-		minNumRules = 80000;//Integer.MAX_VALUE;
 		numRules = 0;
 		int len = m_instances.numAttributes();
 		int numClass = (m_onlyClass.attribute(0)).numValues();
@@ -369,7 +371,7 @@ public class CCFP implements Serializable{
 					double conv = ( 1 - supB[cc]) / (1 - conf);
 					if (conv >= m_minConv){
 						numRules++;
-						if (numRules > minNumRules)
+						if (numRules > maxRules)
 							terminal = true;
 						double weight = calWeight(conv,1,len);
 						pro[cc] += weight;
@@ -506,7 +508,7 @@ public class CCFP implements Serializable{
 							int temp = cal(i,j);
 							dPro[k] += weight *  temp ;
 							numRules += temp;
-							if (numRules > minNumRules){
+							if (numRules > maxRules){
 								terminal = true;
 								return;
 							}
@@ -599,7 +601,7 @@ public class CCFP implements Serializable{
 						double conv = ( 1 - supB[cc]) / (1 - conf);
 						if (conv >= m_minConv){
 							numRules++;
-							if (numRules > minNumRules)
+							if (numRules > maxRules)
 							{
 								terminal = true;	 
 								return;

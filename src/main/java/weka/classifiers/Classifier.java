@@ -312,7 +312,7 @@ public abstract class Classifier implements Cloneable, Serializable,
    */
   protected static void runClassifier(Classifier classifier, String[] options) {
     try {
-      System.out.println(Evaluation.evaluateModel(classifier, options));
+      System.out.print(", "+Evaluation.evaluateModel(classifier, options));//println to print
     } catch (Exception e) {
       if (((e.getMessage() != null) && (e.getMessage().indexOf(
         "General options") == -1))

@@ -1384,8 +1384,8 @@ public class Evaluation implements Summarizable, RevisionHandler {
         tc.getCurve(testingEvaluation.predictions(), labelIndex);
       DataSink.write(thresholdFile, result);
     }
-
-    return text.toString();
+    //return text.toString();
+    return Utils.doubleToString(testingEvaluation.pctCorrect(), 8, 4);
   }
 
   /**
