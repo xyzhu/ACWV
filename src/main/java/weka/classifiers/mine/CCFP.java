@@ -317,15 +317,6 @@ public class CCFP implements Serializable{
 
 	//keep
 	public double[] calculatePro(Instance toTest,FastVector head,double[] supB){
-		//		for(int x=0;x<head.size();x++){
-		//			ListHead lhead = (ListHead)head.elementAt(x);
-		//			System.out.print(lhead.attr+":"+lhead.value);
-		//			for(int y=0;y<lhead.sup.length;y++){
-		//				System.out.print("---"+lhead.sup[y]+"**");
-		//			}
-		//			System.out.println();
-		//		}
-		////////////////////////////for each test instance, find the cond-patten base and build CP-tree
 		terminal  = false;
 		numRules = 0;
 		int len = m_instances.numAttributes();
@@ -408,14 +399,6 @@ public class CCFP implements Serializable{
 					list.addElement(setl);
 				}
 			}
-			//			LabelItemSetII li;
-			//			for(int x=0;x<list.size();x++){
-			//				li = (LabelItemSetII)list.elementAt(x);
-			//				for(int y=0;y<li.items().length;y++){
-			//					System.out.print(li.itemAt(y)+", ");
-			//				}
-			//				System.out.println();
-			//			}
 			if(list.size() > 0){
 
 				FastVector CpTlist=new FastVector();//the list head of new cond-patten tree
@@ -451,14 +434,6 @@ public class CCFP implements Serializable{
 					LinkedList<TNode> beta = new LinkedList<TNode>();
 					beta.add(b);
 					if(subTree.root.child.size() > 0){
-						//						for(int x=0;x<CpTlist.size();x++){
-						//							ListHead lhead = (ListHead)CpTlist.elementAt(x);
-						//							System.out.print(lhead.attr+":"+lhead.value);
-						//							for(int y=0;y<lhead.sup.length;y++){
-						//								System.out.print("---"+lhead.sup[y]+"**");
-						//							}
-						//							System.out.println();
-						//						}
 						mineCMARtree(subTree,CpTlist,beta,min,max,supB,pro);  
 						if (terminal){
 							//							System.out.println("the final number of rules :"+numRules);
@@ -558,6 +533,7 @@ public class CCFP implements Serializable{
 	 */
 	private void mineCMARtree(CMARtree fp,FastVector head,LinkedList<TNode> alpha,int min,int max,double[] supB,double[] dPro) throws Exception{
 
+//		ACWV.recurse++;
 		int i = 0;	 
 		int numAttr=m_instances.numAttributes();       
 		int numInstance = m_instances.numInstances();

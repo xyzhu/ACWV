@@ -28,8 +28,8 @@ public class ACWV extends Classifier
 	//   double minCon = 1.05;
 	//
 	////   Column 02
-	double minSup = 0.01;	
-	double minConv = 1.1;
+	//	double minSup = 0.01;	
+	//	double minConv = 1.1;
 	//
 	////   Column 03
 	//   double minSup = 0.01;	
@@ -86,15 +86,13 @@ public class ACWV extends Classifier
 	////   Column 16
 	//   double minSup = 0.1;	
 	//   double minCon = 1.5;
-
-
-
-	static long timecost = 0;
+	double minSup, minConv;
+	static long recurse;
 	public ACWV(double minsup, double minconv, int ruleNumLimit){
 		minSup = minsup;
 		minConv = minconv;
 		ruleNumLim = ruleNumLimit;
-		
+
 	}
 	public void buildClassifier (Instances data)throws Exception
 	{ 
@@ -113,10 +111,7 @@ public class ACWV extends Classifier
 		//	 count(clValue);
 		if(c>1){
 			f = new CCFP(ruleNumLim);
-			long t1 = System.currentTimeMillis();
 			head = f.buildClassifyNorules(myData, m_onlyClass, minSup, 1, minConv);
-			long t2 = System.currentTimeMillis();
-			timecost += (t2 - t1);
 			//System.out.println("the time cost of building classfier is :" + timecost);
 
 		}
@@ -130,13 +125,11 @@ public class ACWV extends Classifier
 		double dPro[]=new double[l];
 		//	dPro = newcalculatePro(l,instance);
 		if (c > 1){
-			long t1 = System.currentTimeMillis();
-
+//			ACWV.recurse = 0;
+//			long t3 = System.currentTimeMillis();
 			dPro = f.calculatePro(instance, head, classValue);
-			//				System.out.println(dPro[0]+"   "+dPro[1]);
-			//				System.out.println("*****************");
-			long t2 = System.currentTimeMillis();
-			timecost += (t2 - t1);
+//			long t4 = System.currentTimeMillis();
+//			System.out.print("*"+(t4-t3)+"/"+ACWV.recurse+"*, ");
 			//	System.out.println(timecost);
 		}
 		count++;
@@ -177,27 +170,21 @@ public class ACWV extends Classifier
 	}
 
 	public static void main(String[] argv){
-		//			String[] arg ={"-t","tictest.arff"};
-		//			runClassifier(new JzhACWV(), arg);
-
-		String dataset[] = {"tic-tac-toe","hypoout2","autoout","sonarout","sickout"};
-		int size = dataset.length;
 		String arg[] = new String[2];
-		long t1, t2;
-		for(int i=0;i<size;i++){
-			System.out.print(dataset[i]);
-			arg[0] = "-t";
-			arg[1] = "dataset/"+dataset[i]+".arff";
-			t1 = System.currentTimeMillis();
-			runClassifier(new ACWV(0.02,1.1,80000), arg);
-			t2 = System.currentTimeMillis();
-			System.out.println(", "+(t2-t1));
-		}
-//		String d[] = {"vehicleout","balloons","car","lenses","tic-tac-toe","ionoout2",
-//				"pimaout","taeout","habermanout","glassout","breastout","cmcout","ecoliout",
-//				"liverout","postout","hypoout2","yeastout","autoout","cleveout","diabetesout",
-//				"heartout","irisout","laborout","led7","wineout","zoo","crxout","lymph",
-//				"austraout","germanout2","sickout","horseout2","annealout","sonarout2"};
-		
+		arg[0] = "-t";
+		arg[1] = argv[0];
+		double mins = Double.valueOf(argv[1]);
+		double minc = Double.valueOf(argv[2]);
+		int numrule = Integer.valueOf(argv[3]);
+		long t1 = System.currentTimeMillis();
+		runClassifier(new ACWV(mins,minc,numrule), arg);
+		long t2 = System.currentTimeMillis();
+		System.out.println(", "+(t2-t1));
 	}
+//			String d[] = {"vehicleout","balloons","car","lenses","tic-tac-toe","ionoout2",
+//					"pimaout","taeout","habermanout","glassout","breastout","cmcout","ecoliout",
+//					"liverout","postout","hypoout2","yeastout","autoout","cleveout","diabetesout",
+//					"heartout","irisout","laborout","led7","wineout","zoo","crxout","lymph",
+//					"austraout","germanout2","sickout","horseout2","annealout","sonarout2"};
+
 }
