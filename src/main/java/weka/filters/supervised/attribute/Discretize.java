@@ -1033,6 +1033,13 @@ public class Discretize
    * @param argv should contain arguments to the filter: use -h for help
    */
   public static void main(String [] argv) {
+//	  String arg[] = new String[6];
+//	  arg[0]="-i";
+//	  arg[1]="/home/zxy/workspace/ACWV/dataset/iris.arff";
+//	  arg[2]="-c";
+//	  arg[3]="5";
+//	  arg[4]="-o";
+//	  arg[5]="/home/zxy/workspace/ACWV/dataset/disdataset/tt.arff";
     runFilter(new Discretize(), argv);
   }
 }

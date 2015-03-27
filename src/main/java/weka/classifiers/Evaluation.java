@@ -472,6 +472,7 @@ public class Evaluation implements Summarizable, RevisionHandler {
 
     // Make a copy of the data we can reorder
     data = new Instances(data);
+    System.out.print(data.numAttributes()+", "+data.numClasses()+", "+data.numInstances());
     data.randomize(random);
     if (data.classAttribute().isNominal()) {
       data.stratify(numFolds);
