@@ -172,7 +172,7 @@ public class ACWV extends Classifier
 	public static void main(String[] argv){
 //		String arg[] = new String[2];
 //		arg[0] = "-t";
-//		arg[1]="/home/zxy/ACWVClassification/origdataset/discretized/tic-tac-toe.arff";
+//		arg[1]="/home/zxy/ACWVClassification/origdataset/discretized/arrhythmia.arff";
 //		double mins = 0.02;
 //		double minc = 1.1;
 //		int numrule = 80000;

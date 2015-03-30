@@ -121,7 +121,7 @@ public class CCFP implements Serializable{
 		return fp;
 	}
 
-	public int getHashcode(byte a,byte v){
+	public int getHashcode(int a,int v){
 		int result = 0;
 		if (a < 0)
 			return -1;
@@ -131,10 +131,10 @@ public class CCFP implements Serializable{
 		result += v;
 		return result;	  	  
 	}
-	public byte[] getItem(int code){
+	public int[] getItem(int code){
 		int hashcode = code;
 		int len = m_instances.numAttributes();
-		byte[] item = new byte[2];
+		int[] item = new int[2];
 		int i = 0;
 		// int value = 0;
 		for(i = 0; i < len; i++){
@@ -145,8 +145,8 @@ public class CCFP implements Serializable{
 				hashcode -= num;
 			}
 		}
-		item[0] = (byte)i;
-		item[1] = (byte)hashcode;
+		item[0] = i;
+		item[1] = hashcode;
 		return item;
 
 	}
@@ -217,8 +217,8 @@ public class CCFP implements Serializable{
 					throw new Exception("Can't handle numeric attributes!");
 				ListHead lh = new ListHead();
 				lh.count = 1;
-				lh.attr = (byte)j;
-				lh.value = (byte)ins.value(j);
+				lh.attr = j;
+				lh.value = (int)ins.value(j);
 				if (lh.sup == null)
 					lh.sup = new int[numClass];
 				int classlabel = (int)insclass.value(0); 
@@ -404,7 +404,7 @@ public class CCFP implements Serializable{
 				FastVector CpTlist=new FastVector();//the list head of new cond-patten tree
 				for (int cc = 0; cc < numAttr; cc++){
 					if (table[cc] >= min){
-						byte[] av = getItem(cc);
+						int[] av = getItem(cc);
 						ListHead lh = new ListHead(table[cc],av[0],av[1]);
 						lh.sup = new int[numClass];
 						CpTlist.addElement(lh);
@@ -624,7 +624,7 @@ public class CCFP implements Serializable{
 					FastVector CpTlist=new FastVector();//the list head of new cond-patten tree
 					for (int cc = 0; cc < numAttrValue; cc++){
 						if (table[cc] >= min){
-							byte[] av = getItem(cc);
+							int[] av = getItem(cc);
 							ListHead lh = new ListHead(table[cc],av[0],av[1]);
 							lh.sup = new int[numClass];
 							CpTlist.addElement(lh);

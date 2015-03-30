@@ -6,13 +6,13 @@ import weka.core.*;
 
 public class TNode implements Serializable{
 	static final long serialVersionUID = 7684467755712672058L;
-	 public byte value;           
-	 public byte attr;
+	 public int value;           
+	 public int attr;
 	 public int m_counter;                   
 	 public LinkedList<TNode> child;     
 	 public TNode father;  
 	 public int[] sup;
-	 public TNode(byte n,byte v){
+	 public TNode(int n,int v){
 	    	father=null;	     
 	        child=new LinkedList<TNode>();
 	        value=v;
@@ -29,8 +29,8 @@ public class TNode implements Serializable{
 	 public TNode(ItemSet is){
 	    	father=null;       
 	        child=new LinkedList<TNode>();
-	        attr = (byte)is.hashCode();
-	        value = (byte)is.m_items[attr];
+	        attr = (int)is.hashCode();
+	        value = (int)is.m_items[attr];
 	        m_counter = is.m_counter;
 	    }
 	 public TNode(TNode node){
@@ -80,7 +80,7 @@ public class TNode implements Serializable{
 	 public boolean containedBy(Instance instance) {
 		   if (instance.isMissing(attr))
 		        return false;
-		   if ((byte)instance.value(attr) != value)
+		   if ((int)instance.value(attr) != value)
 			   return false;
 		    return true;
 	 }

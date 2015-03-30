@@ -11,8 +11,8 @@ import java.util.ArrayList;
 public class ListHead implements Serializable{
 	static final long serialVersionUID = 7684467755712672058L;
 	   public int count;
-	   public byte attr;
-	   public byte value;
+	   public int attr;
+	   public int value;
 	   public int[] sup;
 	   public FastVector next;
 	   public int nextnum;
@@ -26,11 +26,11 @@ public class ListHead implements Serializable{
 	   public ListHead(ItemSet is){
 		   count = is.m_counter;
 		   next=new FastVector();
-		   attr = (byte)is.hashCode();
-		   value = (byte)is.m_items[attr];
+		   attr = is.hashCode();
+		   value = is.m_items[attr];
 		   nextnum=0;
 	   }
-	   public ListHead(int c,byte item,byte v){
+	   public ListHead(int c,int item, int v){
 		   count=c;
 		   attr=item;
 		   value = v;
@@ -74,7 +74,7 @@ public class ListHead implements Serializable{
 	   public boolean containedBy(Instance instance) {
 		   if (instance.isMissing(attr))
 		        return false;
-		   if ((byte)instance.value(attr) != value)
+		   if (instance.value(attr) != value)
 			   return false;
 		    return true;
 		  }
@@ -112,7 +112,7 @@ public class ListHead implements Serializable{
 	    for (byte i = 0; i < instances.numAttributes(); i++) {
 	    	if (instances.attribute(i).isNumeric())
 	    		throw new Exception("Can't handle numeric attributes!");
-	    	for (byte j = 0; j < instances.attribute(i).numValues(); j++) {
+	    	for (int j = 0; j < instances.attribute(i).numValues(); j++) {
 				current = new ListHead();
 				current.attr = i;
 				current.value = j;    

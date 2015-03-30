@@ -4,19 +4,19 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 public class RuleNode {
 	public class Rules{
-		public byte classlabel;
+		public int classlabel;
 		public double conv;
 		public Rules(){
 			classlabel = -1;
 			conv = 0;
 		}
-		public Rules(byte label,double c){
+		public Rules(int label,double c){
 			classlabel = label;
 			conv = c;
 		}
 	}
-	 public byte value;           
-	 public byte attr;                  
+	 public int value;           
+	 public int attr;                  
 	 public LinkedList<RuleNode> child;     
 //	 public RuleNode father;
 	 public LinkedList<Rules> rule;
@@ -29,7 +29,7 @@ public class RuleNode {
 		 rule = new LinkedList<Rules>();
 	 }
 	 
-	 public RuleNode(byte a,byte v){
+	 public RuleNode(int a, int v){
 		 value = v;
 		 attr = a;
 //		 father = null;
